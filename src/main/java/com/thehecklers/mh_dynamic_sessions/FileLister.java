@@ -23,8 +23,6 @@ public class FileLister {
 
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new Exception("Unexpected code " + response);
-//            System.out.println("Unexpected code from " + this.getClass().getName()
-//                    + ": " + response.getStatusCode());
         }
 
         List<String> files = new ArrayList<>();

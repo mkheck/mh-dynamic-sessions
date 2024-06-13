@@ -12,7 +12,7 @@ import java.io.File;
 
 @Component
 public class FileUploader {
-    public void upload(String url, String token, String filename) throws Exception {
+    public String upload(String url, String token, String filename) throws Exception {
         RestClient client = RestClient.builder()
                 .baseUrl(url)
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
@@ -31,11 +31,9 @@ public class FileUploader {
                 .toEntity(String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            System.out.println("\n>>> Upload response:\n" + response.getBody());
+            return response.getBody();
         } else {
             throw new Exception("Unexpected code: " + response.getStatusCode());
-//            System.out.println("Unexpected code from " + this.getClass().getName()
-//                    + ": " + response.getStatusCode());
         }
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.client.RestClient;
 
 @Component
 public class CodeExecutor {
-    public void execute(String url, String token) throws Exception {
+    public String execute(String url, String token) throws Exception {
         RestClient client = RestClient.create();
 
         // Define JSON payload
@@ -31,12 +31,9 @@ public class CodeExecutor {
                 .toEntity(String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            System.out.println(response.getBody());
+            return response.getBody();
         } else {
-            // MH: Workshop this
             throw new Exception("Unexpected code: " + response.getStatusCode());
-//            System.out.println("Unexpected code from " + this.getClass().getName()
-//                    + ": " + response.getStatusCode());
         }
     }
 }
